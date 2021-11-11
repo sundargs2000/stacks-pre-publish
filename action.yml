@@ -1,0 +1,13 @@
+name: stacktion
+description: runs the pre publish checks and if fine, creates a release
+
+outputs:
+  success:
+    description: whether success or not
+  errors:
+    description: a line seperated list of errors
+
+runs:
+  using: 'node12'
+  pre: 'setup.js'
+  main: 'index.js'
