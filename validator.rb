@@ -380,10 +380,7 @@ def validate
   #   return
   # end
   # File.write("pre_publish_validate.errors.log", error_file)
-  puts Dir.entries("."), "\n"
-  puts Dir.entries(".."), "\n"
-  puts Dir.entries("../.."), "\n"
-
+  puts Dir.entries("./stack_repo"), "\n"
 end
 
 
