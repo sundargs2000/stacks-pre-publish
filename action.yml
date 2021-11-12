@@ -27,3 +27,4 @@ runs:
       run: |
         ls
         pwd
+        ruby validator.rb
