@@ -16,6 +16,7 @@ function run() {
         core.debug('values file found.');
     }
 
+    console.log(execSync('ls'));
     try {
         execSync(`ruby ./validator.rb ${templatePath} ${valuesPath}`);
     } catch (error) {
