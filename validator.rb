@@ -361,10 +361,10 @@ end
 
 def validate
   template = nil
-  if File.file?("#{ARGV[0]}/.github/stacks/stack.yml")
-    template = File.open("#{ARGV[0]}/.github/stacks/stack.yml").read
-  elsif File.file?("#{ARGV[0]}/.github/stacks/stack.yaml")
-    template = File.open("#{ARGV[0]}/.github/stacks/stack.yaml").read
+  if File.file?("./.github/stacks/stack.yml")
+    template = File.open("./.github/stacks/stack.yml").read
+  elsif File.file?("./.github/stacks/stack.yaml")
+    template = File.open("./.github/stacks/stack.yaml").read
   else
     raise "Stack template not found."
   end
