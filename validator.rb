@@ -14,7 +14,7 @@ class StackParser
     STACK_TEMPLATE_VALUES = "StackTemplateValues"
   
     SCHEMAS = {
-        "0.1.0" => JSON.parse(File.read("schemas/stack_schema-0.1.0.json"))
+        "0.1.0" => JSON.parse(File.read("#{ARGV[0]}/schemas/stack_schema-0.1.0.json"))
     }.freeze
     
     attr_reader :stack_schema, :stack_template, :stack_template_obj, :values
@@ -360,7 +360,14 @@ class StacksMustache < Mustache
 end
 
 def validate
-  template = File.open(ARGV[0]).read
+  template = ""
+  if File.file?("./.github/stacks/stack.yml")
+    template = File.open("./.github/stacks/stack.yml").read
+  elsif File.file?("./.github/stacks/stack.yaml")
+    template = File.open("./.github/stacks/stack.yaml").read
+  else
+    raise "Stack template not found."
+  end
 
   if template == ""
     File.write("pre_publish_validate.errors.log", "Empty template given.")
@@ -368,18 +375,28 @@ def validate
   end
 
   values = ""
-  values = File.open(ARGV[1]) if ARGV[1] 
+  if File.file?("./.github/stacks/values.yml")
+    values = File.open("./.github/stacks/values.yml").read
+  elsif File.file?("./.github/stacks/values.yaml")
+    values = File.open("./.github/stacks/values.yaml").read
+  end
 
-  error_file = ""
   begin
-    StacksPrePublish.validate(template, values).each do |error|
-        error_file = "#{error.message}\n#{error_file}"
-    end
+    errors = StacksPrePublish.validate(template, values)
   rescue StandardError => e
-    File.write("pre_publish_validate.errors.log", e.message)
+    puts "Pre publish checks failed ❌ Errors found:"
+    puts e.message
     return
   end
-  File.write("pre_publish_validate.errors.log", error_file)
+
+  if errors.empty?
+    puts "Pre publish checks passed ✅ You are good for a release."
+    system('echo "::set-output name=success::true"')
+  else
+    puts "Pre publish checks failed ❌ Errors found:"
+    system('echo "::set-output name=success::false"')
+    puts errors
+  end
 end
 
 

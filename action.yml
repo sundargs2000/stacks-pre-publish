@@ -1,13 +1,30 @@
-name: stacktion
+name: stack-pre-publish
 description: runs the pre publish checks and if fine, creates a release
 
 outputs:
   success:
     description: whether success or not
-  errors:
-    description: a line seperated list of errors
-
 runs:
-  using: 'node12'
-  # pre: 'setup.js'
-  main: 'index.js'
+  using: composite
+  steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-ruby@v1
+    - run: echo "${{ github.action_path }}"
+      shell: bash 
+
+    - name: install dependencies and run validator
+      shell: bash
+      run: |
+        echo "${{ env.GITHUB_WORKSPACE }}"
+        cd ${{ github.action_path }}
+        gem install bundler
+        bundle update --bundler
+        bundle install
+    
+    - id: checks
+      name: install dependencies and run validator
+      shell: bash
+      run: |
+        ruby ${{ github.action_path }}/validator.rb ${{ github.action_path }}
+
