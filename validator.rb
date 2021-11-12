@@ -360,7 +360,7 @@ class StacksMustache < Mustache
 end
 
 def validate
-  template = nil
+  template = ""
   if File.file?("./.github/stacks/stack.yml")
     template = File.open("./.github/stacks/stack.yml").read
   elsif File.file?("./.github/stacks/stack.yaml")
@@ -375,18 +375,24 @@ def validate
   end
 
   values = ""
-  values = File.open(ARGV[1]) if ARGV[1] 
+  if File.file?("./.github/stacks/values.yml")
+    values = File.open("./.github/stacks/values.yml").read
+  elsif File.file?("./.github/stacks/values.yaml")
+    values = File.open("./.github/stacks/values.yaml").read
+  end
 
-  error_file = ""
   begin
-    StacksPrePublish.validate(template, values).each do |error|
-        error_file = "#{error.message}\n#{error_file}"
-    end
+    errors = StacksPrePublish.validate(template, values)
   rescue StandardError => e
     puts e.message
     return
   end
-  puts error_file
+  if errors.empty?
+    puts "Pre publish checks passed ✅ You are good for a release."
+  else
+    puts "Pre publish checks failed ❌ Errors found:"
+    puts errors
+  end
 end
 
 
