@@ -8,9 +8,11 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v2
+
     - uses: actions/setup-ruby@v1
     - run: echo "${{ github.action_path }}"
       shell: bash 
+
     - name: install dependencies and run validator
       shell: bash
       run: |
@@ -19,17 +21,10 @@ runs:
         gem install bundler
         bundle update --bundler
         bundle install
-    - id: bruh
+    
+    - id: checks
       name: install dependencies and run validator
       shell: bash
       run: |
         ruby ${{ github.action_path }}/validator.rb ${{ github.action_path }}
 
-    - name: Create Release
-      if: ${{ steps.bruh.outputs.success }}
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
