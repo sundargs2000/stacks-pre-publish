@@ -22,4 +22,4 @@ runs:
         gem install bundler
         bundle update --bundler
         bundle install
-        ruby validator.rb
+        ruby validator.rb ${{ env.GITHUB_WORKSPACE }}
