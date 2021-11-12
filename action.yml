@@ -4,9 +4,6 @@ description: runs the pre publish checks and if fine, creates a release
 outputs:
   success:
     description: whether success or not
-  errors:
-    description: a line seperated list of errors
-
 runs:
   using: composite
   steps:
@@ -22,7 +19,11 @@ runs:
         gem install bundler
         bundle update --bundler
         bundle install
-    - name: install dependencies and run validator
+    - id: bruh
+      name: install dependencies and run validator
       shell: bash
       run: |
         ruby ${{ github.action_path }}/validator.rb ${{ github.action_path }}
+
+    - run: echo ${{ steps.bruh.outputs.success }}
+      shell: bash

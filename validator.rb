@@ -391,8 +391,10 @@ def validate
 
   if errors.empty?
     puts "Pre publish checks passed ✅ You are good for a release."
+    system('echo "::set-output name=success::true"')
   else
     puts "Pre publish checks failed ❌ Errors found:"
+    system('echo "::set-output name=success::false"')
     puts errors
   end
 end
