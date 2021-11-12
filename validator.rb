@@ -14,7 +14,7 @@ class StackParser
     STACK_TEMPLATE_VALUES = "StackTemplateValues"
   
     SCHEMAS = {
-        "0.1.0" => JSON.parse(File.read("schemas/stack_schema-0.1.0.json"))
+        "0.1.0" => JSON.parse(File.read("#{ARGV[0]}/schemas/stack_schema-0.1.0.json"))
     }.freeze
     
     attr_reader :stack_schema, :stack_template, :stack_template_obj, :values
@@ -381,7 +381,6 @@ def validate
   # end
   # File.write("pre_publish_validate.errors.log", error_file)
   puts Dir.entries(".")
-
 end
 
 
