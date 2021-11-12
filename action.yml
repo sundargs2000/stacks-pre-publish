@@ -22,4 +22,8 @@ runs:
         gem install bundler
         bundle update --bundler
         bundle install
-    - uses: ${{ github.action_path }}
+    - name: install dependencies and run validator
+      shell: bash
+      run: |
+        ls
+        pwd
