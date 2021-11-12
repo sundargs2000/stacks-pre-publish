@@ -360,7 +360,7 @@ class StacksMustache < Mustache
 end
 
 def validate
-  template = File.open(ARGV[0]).read
+  # template = File.open(ARGV[0]).read
 
   # if template == ""
   #   File.write("pre_publish_validate.errors.log", "Empty template given.")
