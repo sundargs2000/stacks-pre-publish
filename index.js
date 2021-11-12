@@ -17,7 +17,7 @@ function run() {
     }
 
     try {
-        execSync(`ruby validator.rb ${templatePath} ${valuesPath}`);
+        execSync(`ruby ./validator.rb ${templatePath} ${valuesPath}`);
     } catch (error) {
         core.setFailed('Something failed. Probably not your fault.');
         core.debug(error.toString());
