@@ -12,6 +12,10 @@ runs:
   steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-ruby@v1
+    - run: echo "${{ env.GITHUB_WORKSPACE }}"
+      shell: bash 
+    - run: echo "${{ github.action_path }}"
+      shell: bash 
     - name: install dependencies and run validator
       shell: bash
       run: |
