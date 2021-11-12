@@ -360,26 +360,33 @@ class StacksMustache < Mustache
 end
 
 def validate
-  # template = File.open(ARGV[0]).read
+  template = nil
+  if File.file?("#{ARGV[0]}/.github/stacks/stack.yml")
+    template = File.open("#{ARGV[0]}/.github/stacks/stack.yml").read
+  elsif File.file?("#{ARGV[0]}/.github/stacks/stack.yaml")
+    template = File.open("#{ARGV[0]}/.github/stacks/stack.yaml").read
+  else
+    raise "Stack template not found."
+  end
 
-  # if template == ""
-  #   File.write("pre_publish_validate.errors.log", "Empty template given.")
-  #   return
-  # end
+  if template == ""
+    File.write("pre_publish_validate.errors.log", "Empty template given.")
+    return
+  end
 
-  # values = ""
-  # values = File.open(ARGV[1]) if ARGV[1] 
+  values = ""
+  values = File.open(ARGV[1]) if ARGV[1] 
 
-  # error_file = ""
-  # begin
-  #   StacksPrePublish.validate(template, values).each do |error|
-  #       error_file = "#{error.message}\n#{error_file}"
-  #   end
-  # rescue StandardError => e
-  #   File.write("pre_publish_validate.errors.log", e.message)
-  #   return
-  # end
-  # File.write("pre_publish_validate.errors.log", error_file)
+  error_file = ""
+  begin
+    StacksPrePublish.validate(template, values).each do |error|
+        error_file = "#{error.message}\n#{error_file}"
+    end
+  rescue StandardError => e
+    File.write("pre_publish_validate.errors.log", e.message)
+    return
+  end
+  File.write("pre_publish_validate.errors.log", error_file)
   puts Dir.entries(".")
 end
 
