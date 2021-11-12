@@ -10,6 +10,7 @@ outputs:
 runs:
   using: composite
   steps:
+    - uses: actions/checkout@v2
     - uses: actions/setup-ruby@v1
     - name: install dependencies and run validator
       shell: bash
