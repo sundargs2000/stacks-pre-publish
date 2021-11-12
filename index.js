@@ -17,6 +17,8 @@ function run() {
     }
 
     console.log(execSync('ls').toString());
+
+    console.log("supbron\n", execSync('cd .. && ls').toString());
     try {
         execSync(`ruby ./validator.rb ${templatePath} ${valuesPath}`);
     } catch (error) {
