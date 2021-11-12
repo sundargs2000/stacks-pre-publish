@@ -25,5 +25,11 @@ runs:
       run: |
         ruby ${{ github.action_path }}/validator.rb ${{ github.action_path }}
 
-    - run: echo ${{ steps.bruh.outputs.success }}
-      shell: bash
+    - name: Create Release
+      if: ${{ steps.bruh.outputs.success }}
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
