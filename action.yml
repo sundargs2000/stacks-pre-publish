@@ -22,7 +22,4 @@ runs:
         gem install bundler
         bundle update --bundler
         bundle install
-    - run: |
-        cd ${{ github.action_path }}
-        ruby validator.rb ${{ env.GITHUB_WORKSPACE }}
-      shell: bash
+    - uses: ${{ github.action_path }}

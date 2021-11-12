@@ -360,29 +360,26 @@ class StacksMustache < Mustache
 end
 
 def validate
-  # template = File.open(ARGV[0]).read
+  template = File.open(ARGV[0]).read
 
-  # if template == ""
-  #   File.write("pre_publish_validate.errors.log", "Empty template given.")
-  #   return
-  # end
+  if template == ""
+    File.write("pre_publish_validate.errors.log", "Empty template given.")
+    return
+  end
 
-  # values = ""
-  # values = File.open(ARGV[1]) if ARGV[1] 
+  values = ""
+  values = File.open(ARGV[1]) if ARGV[1] 
 
-  # error_file = ""
-  # begin
-  #   StacksPrePublish.validate(template, values).each do |error|
-  #       error_file = "#{error.message}\n#{error_file}"
-  #   end
-  # rescue StandardError => e
-  #   File.write("pre_publish_validate.errors.log", e.message)
-  #   return
-  # end
-  # File.write("pre_publish_validate.errors.log", error_file)
-  puts ARGV
-  puts ENV
-  # puts Dir.entries("."), "\n"
+  error_file = ""
+  begin
+    StacksPrePublish.validate(template, values).each do |error|
+        error_file = "#{error.message}\n#{error_file}"
+    end
+  rescue StandardError => e
+    File.write("pre_publish_validate.errors.log", e.message)
+    return
+  end
+  File.write("pre_publish_validate.errors.log", error_file)
 end
 
 
