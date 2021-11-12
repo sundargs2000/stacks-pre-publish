@@ -16,5 +16,6 @@ runs:
       run: |
         cd ${{ github.action_path }}
         gem install bundler
+        bundle update --bundler
         bundle install
         ruby validator.rb
