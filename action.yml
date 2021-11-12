@@ -12,6 +12,7 @@ runs:
   steps:
     - uses: actions/setup-ruby@v1
     - name: install dependencies and run validator
+      shell: bash
       run: |
         cd ${{ github.action_path }}
         gem install bundler
