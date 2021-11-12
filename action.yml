@@ -27,4 +27,4 @@ runs:
       run: |
         ls
         pwd
-        ruby validator.rb
+        ruby ${{ github.action_path }}/validator.rb
