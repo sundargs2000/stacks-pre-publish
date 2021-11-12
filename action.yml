@@ -1,4 +1,4 @@
-name: stacktion
+name: stack-pre-publish
 description: runs the pre publish checks and if fine, creates a release
 
 outputs:
