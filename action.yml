@@ -8,6 +8,12 @@ outputs:
     description: a line seperated list of errors
 
 runs:
-  using: 'node12'
-  # pre: 'setup.js'
-  main: 'index.js'
+  using: composite
+  steps:
+    - uses: actions/setup-ruby@v1
+    - name: install dependencies and run validator
+      run: |
+        cd ${{ github.action_path }}
+        gem install bundler
+        bundle install
+        ruby validator.rb

@@ -380,6 +380,9 @@ def validate
     return
   end
   File.write("pre_publish_validate.errors.log", error_file)
+  puts "sup"
+  puts Dir.entries(".")
+
 end
 
 
