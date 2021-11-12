@@ -381,7 +381,7 @@ def validate
   # end
   # File.write("pre_publish_validate.errors.log", error_file)
   puts ARGV
-  puts Dir.entries("."), "\n"
+  # puts Dir.entries("."), "\n"
 end
 
 
