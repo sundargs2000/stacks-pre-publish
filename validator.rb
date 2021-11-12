@@ -383,11 +383,10 @@ def validate
         error_file = "#{error.message}\n#{error_file}"
     end
   rescue StandardError => e
-    File.write("pre_publish_validate.errors.log", e.message)
+    puts e.message
     return
   end
-  File.write("pre_publish_validate.errors.log", error_file)
-  puts Dir.entries(".")
+  puts error_file
 end
 
 

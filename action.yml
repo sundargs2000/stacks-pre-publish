@@ -25,6 +25,4 @@ runs:
     - name: install dependencies and run validator
       shell: bash
       run: |
-        ls
-        pwd
         ruby ${{ github.action_path }}/validator.rb ${{ github.action_path }}
