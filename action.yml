@@ -11,14 +11,13 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v2
-      with:
-        path: '${{ github.action_path }}/stack_repo' 
     - uses: actions/setup-ruby@v1
     - name: install dependencies and run validator
       shell: bash
       run: |
+        echo $GITHUB_WORKSPACE
         cd ${{ github.action_path }}
         gem install bundler
         bundle update --bundler
         bundle install
-        ruby validator.rb
+        ruby validator.rb ${{}}
