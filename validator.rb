@@ -384,9 +384,11 @@ def validate
   begin
     errors = StacksPrePublish.validate(template, values)
   rescue StandardError => e
+    puts "Pre publish checks failed ❌ Errors found:"
     puts e.message
     return
   end
+
   if errors.empty?
     puts "Pre publish checks passed ✅ You are good for a release."
   else
