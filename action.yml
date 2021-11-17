@@ -30,4 +30,4 @@ runs:
 
     - name: set output
       shell: bash
-      run: echo ${{ steps.checks.success }}
+      run: echo ${{ steps.checks.outputs.success }}
