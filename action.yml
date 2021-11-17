@@ -23,8 +23,11 @@ runs:
         bundle install
     
     - id: checks
-      name: install dependencies and run validator
+      name: run the checks
       shell: bash
       run: |
         ruby ${{ github.action_path }}/validator.rb ${{ github.action_path }}
 
+    - name: set output
+      shell: bash
+      run: echo ${{ steps.checks.success }}
