@@ -4,6 +4,7 @@ description: runs the pre publish checks and if fine, creates a release
 outputs:
   success:
     description: whether success or not
+    value: ${{ steps.checks.outputs.success }}
 runs:
   using: composite
   steps:
@@ -25,7 +26,3 @@ runs:
       shell: bash
       run: |
         ruby ${{ github.action_path }}/validator.rb ${{ github.action_path }}
-
-    - name: set output
-      shell: bash
-      run: echo "::set-output name=success::$(echo ${{ steps.checks.outputs.success }})"
