@@ -5,10 +5,10 @@ Add this YAML to get run the tests. Checks output in the logs.
 name: Run Pre Publish and Release stacks
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Explore-GitHub-Stacks:
     runs-on: ubuntu-latest
     steps:
-      - uses: sundargs2000/stacks-pre-publish@vbeta1
+      - uses: sundargs2000/stacks-pre-publish@master
 ```
 
 ## About
@@ -20,11 +20,11 @@ You can use the output of this action to create releases as well, as shown in th
 name: Run Pre Publish and Release stacks
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Explore-GitHub-Stacks:
     runs-on: ubuntu-latest
     steps:
       - id: prepublish
-        uses: sundargs2000/stacks-pre-publish@vbeta1
+        uses: sundargs2000/stacks-pre-publish@master
           
       - name: Create Release
         if: ${{ steps.prepublish.outputs.success == 'true' }}

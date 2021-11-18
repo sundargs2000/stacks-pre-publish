@@ -188,7 +188,7 @@ class StacksPrePublish
   
         if input.key? "validvalues"
           # ensure all validvalues provided are of the defined type
-          if (type = input.fetch("type", nil)).present?
+          if (type = input.fetch("type", nil))
             input["validvalues"].each do |valid_value|
               @errors.append(StandardError.new("#{VALID_VALUES_MATCH_ERROR}: valid_value => #{valid_value}, received_type => #{type_map(valid_value.class)}, expected_type => #{type}")) if type_map(valid_value.class) != type
             end
@@ -200,7 +200,7 @@ class StacksPrePublish
   
         if input.key? "default"
           # ensure default value is of the defined type
-          @errors.append(StandardError.new("#{DEFAULT_VALUE_MATCH_ERROR}: received_type => #{type_map(input["default"].class)}, expected_type => #{type}}")) if (type = input.fetch("type", nil)).present? && type_map(input["default"].class) != type
+          @errors.append(StandardError.new("#{DEFAULT_VALUE_MATCH_ERROR}: received_type => #{type_map(input["default"].class)}, expected_type => #{type}}")) if (type = input.fetch("type", nil)) && type_map(input["default"].class) != type
   
           # assign default value
           value = input["default"]
@@ -208,7 +208,7 @@ class StacksPrePublish
   
         if @values.key? input["name"]
           # ensure values.yml value is of the defined type
-          @errors.append(StandardError.new("#{VALUES_MATCH_ERROR}: received_type => #{type_map(@values[input["name"]].class)}, expected_type => #{type}}")) if (type = input.fetch("type", nil)).present? && type_map(@values[input["name"]].class) != type
+          @errors.append(StandardError.new("#{VALUES_MATCH_ERROR}: received_type => #{type_map(@values[input["name"]].class)}, expected_type => #{type}}")) if (type = input.fetch("type", nil)) && type_map(@values[input["name"]].class) != type
   
           # assign values.yml value
           value = @values[input["name"]]
@@ -384,9 +384,9 @@ def validate
   begin
     errors = StacksPrePublish.validate(template, values)
   rescue StandardError => e
-    puts "Pre publish checks failed ❌ Errors found:"
+    puts "Pre publish checks failed. Errors found:"
     puts e.message
-    return
+    exit(1)
   end
 
   if errors.empty?
@@ -396,8 +396,8 @@ def validate
     puts "Pre publish checks failed ❌ Errors found:"
     system('echo "::set-output name=success::false"')
     puts errors
+    exit(1)
   end
 end
-
 
 validate
