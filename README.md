@@ -8,7 +8,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: sundargs2000/stacks-pre-publish@v0
+      - uses: sundargs2000/stacks-pre-publish@vbeta0
 ```
 
 ## About
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: prepublish
-        uses: sundargs2000/stacks-pre-publish@v0
+        uses: sundargs2000/stacks-pre-publish@vbeta0
           
       - name: Create Release
         if: ${{ steps.prepublish.outputs.success == 'true' }}
