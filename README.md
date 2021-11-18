@@ -8,8 +8,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - id: prepublish
-        uses: sundargs2000/stacks-pre-publish@v0
+      - uses: sundargs2000/stacks-pre-publish@v0
 ```
 
 ## About
@@ -41,7 +40,7 @@ jobs:
 
 Currently the pre-publish checks is a black box.
 ![alt text](https://user-images.githubusercontent.com/33158091/136909645-f00614ac-aa1f-42ad-9366-ca43bd7dcd8b.png)
-We have plans to add an authoring experience, but until then, this action can be used to run the tests if you are stuck and unable to figure out what's wrong with your template. You would see a log like this:
+We have plans to add authoring experiences, until then this action can be used to run the tests if you are stuck and unable to figure out what's wrong with your template. You would see a log like this:
 ![Screenshot](.github/stack-errors.png)
 
 Currently maintaining this action and plan to keep it up to date with the changes we make. Please reach out to me if you find any issues or have suggestions. It isn't really complete yet (there aren't even tests 😛).
