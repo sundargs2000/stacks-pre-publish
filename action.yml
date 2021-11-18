@@ -15,7 +15,6 @@ runs:
     - name: install dependencies and run validator
       shell: bash
       run: |
-        echo "${{ env.GITHUB_WORKSPACE }}"
         cd ${{ github.action_path }}
         gem install bundler
         bundle update --bundler
