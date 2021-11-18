@@ -32,7 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: v1.${{ github.ref }}
+          tag_name: v1.${{ github.sha }}
           release_name: Release stack/${{ github.ref }}
 ```
 
